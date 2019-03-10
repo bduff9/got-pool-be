@@ -87,6 +87,11 @@ const Logs = db.define('log', {
 			'SUBMIT',
 		]),
 	},
+	time: {
+		allowNull: false,
+		field: 'created_at',
+		type: Sequelize.DATE,
+	},
 }, {
 	comment: 'All logged actions for users',
 });
