@@ -1,0 +1,42 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: got-pool-be
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: develop
+  region: us-east-2
+  vpc:
+    securityGroupIds:
+      - sg-ceb65aa0
+    subnetIds:
+      - subnet-70556918
+      - subnet-b14597fd
+      - subnet-d64a20ac
+  environment:
+    MYSQL_HOST: ${self:custom.secrets.MYSQL_HOST}
+    MYSQL_USER: ${self:custom.secrets.MYSQL_USER}
+    MYSQL_PASS: ${self:custom.secrets.MYSQL_PASS}
+
+functions:
+  graphql:
+    handler: handler.graphql
+    events:
+      - http:
+          path: graphql
+          method: post
+
+custom:
+  secrets: ${file(secrets.json)}
