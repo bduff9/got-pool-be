@@ -37,6 +37,7 @@ functions:
       - http:
           path: graphql
           method: post
+          cors: true
 
 custom:
   secrets: ${file(secrets.json)}

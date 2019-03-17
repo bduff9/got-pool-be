@@ -1,6 +1,8 @@
-const { gql } = require('apollo-server-lambda');
+const {
+	gql
+} = require('apollo-server-lambda');
 
-const typeDefs = gql`
+const typeDefs = gql `
 	enum LogActionEnum {
 		_404
 		LOGIN
@@ -56,12 +58,21 @@ const typeDefs = gql`
 
 	type Query {
 		characters: [Character]
+		currentUser: User
 		logs: [Log]
+		myPicks: [Pick]
 		picks: [Pick]
 		users: [User]
 	}
 
 	type Mutation {
+		addUser (
+			id: String!,
+			name: String!,
+			paymentOption: PaymentEnum!,
+			account: String
+		): User
+
 		logAction (
 			user_id: String,
 			message: String!,

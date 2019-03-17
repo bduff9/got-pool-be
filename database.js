@@ -13,7 +13,6 @@ const db = new Sequelize('GoT', user, pwd, {
 	dialect: 'mysql',
 	dialectOptions: {},
 	host,
-	operatorsAliases: false,
 	pool: {
 		max: 5,
 		min: 0,
@@ -71,10 +70,8 @@ const Logs = db.define('log', {
 	},
 	message: {
 		allowNull: false,
+		defaultValue: '',
 		type: Sequelize.STRING,
-		validate: {
-			notEmpty: true,
-		},
 	},
 	action: {
 		allowNull: false,
@@ -88,7 +85,7 @@ const Logs = db.define('log', {
 		]),
 	},
 	time: {
-		allowNull: false,
+		allowNull: true,
 		field: 'created_at',
 		type: Sequelize.DATE,
 	},
@@ -181,11 +178,20 @@ const Users = db.define('user', {
 });
 
 // Define table relationships
-Logs.belongsTo(Users, { foreignKey: 'user_id' });
-Picks.belongsTo(Users, { foreignKey: 'user_id' });
-Picks.belongsTo(Characters, { foreignKey: 'character_id' });
+Logs.belongsTo(Users, {
+	foreignKey: 'user_id'
+});
+Picks.belongsTo(Users, {
+	foreignKey: 'user_id'
+});
+Picks.belongsTo(Characters, {
+	foreignKey: 'character_id'
+});
 
 // Create the tables if they don't exist yet
-db.sync();
+//db.sync();
 
-module.exports = { db, Sequelize };
+module.exports = {
+	db,
+	Sequelize
+};
