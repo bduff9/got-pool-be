@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-lambda": "2.4.8",
+    "apollo-server-lambda": "2.13.1",
     "graphql": "14.1.1",
-    "graphql-tools": "4.0.4",
+    "graphql-tools": "4.0.8",
     "jsonwebtoken": "8.5.0",
     "jwk-to-pem": "2.0.1",
     "mysql2": "1.6.5",
